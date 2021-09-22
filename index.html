@@ -8,6 +8,10 @@
         <link href="https://fonts.googleapis.com/css?family=Heebo:100,300,400,500,600,700,900" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+      <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
         <link rel="stylesheet" href="css/style.css">
         
         <link rel="shortcut icon" type="image/png" href="img/favicon.png">
@@ -16,7 +20,6 @@
             ::-webkit-scrollbar {
               width: 15px;
             }
-            
             /* Track */
             ::-webkit-scrollbar-track {
               background: #f1f1f1; 
@@ -33,14 +36,11 @@
               background: #1c50ba; 
             }
             </style>
-        
-        
         <title>| High is better</title>
     </head>
     <body>
-       
         <nav id="navbar" class="navbar">
-            <div id="logo" class="navbar__logobox" onclick="menuClick('logo')">
+            <div id="logo" class="navbar__logobox animate__animated animate__zoomInDown" onclick="menuClick('logo')">
                 <img src="./img/Logo_400_blanco.png" alt="Logotipo" class="navbar__logo">
             </div>
         </nav>
@@ -50,14 +50,14 @@
         <!-- -----------------------------------SECTION 1 ------------------------------------------------------------->
          <section class="section section--1">
             
-                 <div class="header__box">
-                    <div class="header__title">high is</div>
-                    <div class="header__subtitle">better</div>
+                 <div id="header_box" class="header__box">
+                    <div class="header__title animate__animated animate__zoomInDown">high is</div>
+                    <div class="header__subtitle animate__animated animate__zoomInUp animate__delay-1s">better</div>
                     <div class="header__text"><span class="header__span"></span><span class="header__span"></span></div>
                  </div>
-                <ul class="menu__list">
-                    <li id="serviciosButton" class="menu__link" onclick="menuClick('serviciosButton')">servicios_</li> 
-                    <li id="promocionesButton" class="menu__link" onclick="menuClick('contactoButton')">contacto_</li>
+                <ul id="header_menu" class="header_menu">
+                    <li id="serviciosButton" class="header_menu__link" onclick="menuClick('serviciosButton')">servicios_</li> 
+                    <li id="contactoButton" class="header_menu__link" onclick="menuClick('contactoButton')">contacto_</li>
                  </ul>
          </section>
          <!-- -----------------------------------SECTION 2 ------------------------------------------------------------->
@@ -65,20 +65,20 @@
             <div id="servicios" class="section__title">servicios</div>
             <div class="servicios_container">
                 <div class="info_display">
-                    <!-- -------------------------------Section 2 renovables------------------------->
+                    <!-- -------------------------------R enovables ---------------------------------------------->
                     <div id="renovables" class="info_slide info_slide--1">
                         <h1 class="info_slide__title">energía solar</h1>
                         <!-- -------------------------------SOLAR------------------------->
                         <div class="info_slide__container info_slide__container--1">
-                            <div class="card">
+                            <div class="card" onclick="openPopup('interconexion')" >
                                 <img class="card__image" src="./img/solar_panel.jpg"/>
                                 <h1 class="card__title">Interconexión CFE</h1>
                             </div>
-                            <div class="card">
+                            <div class="card" onclick="openPopup('aislado')">
                                 <img class="card__image" src="./img/solar_aislado.jpg"/>
                                 <h1 class="card__title">Aislado (Con baterias)</h1>
                             </div>
-                            <div class="card">
+                            <div class="card" onclick={openPopup(industrial)}>
                                 <img class="card__image" src="./img/solar_industrial.jpg"/>
                                 <h1 class="card__title">Soluciones industriales</h1>
                             </div>
@@ -87,11 +87,11 @@
                         <!-- -------------------------------H2O------------------------->
                         <h1 class="info_slide__title">Soluciones H2O</h1>
                         <div class="info_slide__container info_slide__container--1">
-                            <div class="card">
+                            <div class="card" onclick={openPopup(PTAR)}>
                                 <img class="card__image" src="./img/tratamiento_1.jpg"/>
                                 <h1 class="card__title">PTAR automáticas</h1>
                             </div>
-                            <div class="card">
+                            <div class="card" onclick={openPopup(captacion)}>
                                 <img class="card__image" src="./img/captacion_lluvia.jpg"/>
                                 <h1 class="card__title">Captación de lluvia</h1>
                             </div>
@@ -101,11 +101,11 @@
                     <div id="smarthome" class="info_slide info_slide--2">
                         <h1 class="info_slide__title">smart home</h1>
                         <div class="info_slide__container info_slide__container--1">
-                            <div class="card">
+                            <div class="card" onclick={openPopup(iluminacion)}>
                                 <img class="card__image" src="./img/smart_light.jpg"/>
                                 <h1 class="card__title">Iluminación inteligente</h1>
                             </div>
-                            <div class="card">
+                            <div class="card" onclick={openPopup(audio)}>
                                 <img class="card__image" src="./img/smart_audio.jpg"/>
                                 <h1 class="card__title">Audio inteligente</h1>
                             </div>
@@ -113,11 +113,11 @@
                         </div>
                         <h1 class="info_slide__title">entretenimiento</h1>
                         <div class="info_slide__container info_slide__container--1">
-                            <div class="card">
+                            <div class="card" onclick={openPopup(cine)}>
                                 <img class="card__image" src="./img/home_theater.jpg"/>
                                 <h1 class="card__title">Cine en casa</h1>
                             </div>
-                            <div class="card">
+                            <div class="card" onclick={openPopup(internet)}>
                                 <img class="card__image" src="./img/internet.jpg"/>
                                 <h1 class="card__title">Internet cableado y Wifi</h1>
                             </div>
@@ -140,211 +140,64 @@
                 </div>
             </div>
          </section>
+         <!-- -----------------------------------SECTION 3 ------------------------------------------------------------->
          <section class="section section--3">
             <div  class="contacto_logobox" onclick="menuClick('logo')">
                 <img id="logo_contacto" src="./img/Logo_400_blanco.png" alt="Logotipo" class="contacto_logo">
             </div>
             <div class="contacto_container">
-                <div class="header__box">
-                   
-                   <div id="contacto" class="header__title">contacto</div>
-                   <div class="header__text"><span class="header__span"></span><span class="header__span"></span></div>
+                <div class="contacto__box">
+                   <div id="contacto" class="contacto__title">contacto</div>
                 </div>
-               <ul class="menu__list">
-                   <li ><a class="menu__link"href="https://www.facebook.com/highdatamx">facebook</a></li> 
-                   <li ><a class="menu__link" href="https://www.instagram.com/highdatamx/">instagram</a></li> 
-                   <li ><a class="menu__link" >correo</a></li> 
-                   <li ><a class="menu__link" >whatsapp</a></li> 
+               <ul class="contacto_menu">
+                   <li ><a class="contacto_menu__link"href="https://www.facebook.com/highdatamx">facebook</a></li> 
+                   <li ><a class="contacto_menu__link" href="https://www.instagram.com/highdatamx/">instagram</a></li> 
+                   <li ><a class="contacto_menu__link" >correo</a></li> 
+                   <li ><a class="contacto_menu__link" >whatsapp</a></li> 
                 </ul>
             </div>
          </section>
+         <!-- -----------------------------------------SECTION 4 POPUP------------------------------------------------------>
+         <div id="popup_screen" class="section section--4">
+             <!---------------------------------------POPUP 1----------------------------------->
+             <div id="popupInterconexion" class="popup">
+                 <div id="popup_close_button" class="close_button" onclick="popupClose('interconexion')">X</div>
+                 <div class="popup__titles">
+                     <div id="popup_title" class="popup__title">Energía Solar</div>
+                     <div id="popup_subtitle" class="popup__subtitle">Interconexión con CFE</div>
+                 </div>
+                 <div class="popup__images">
+                    <img class="popup__image" src="./img/solar_panel.jpg"/>
+                 </div>
+                 <div id="popup_info" class="popup__info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non mi eu est tempus semper. Proin in erat semper, mattis lorem posuere, rutrum lectus. Nunc felis diam, laoreet ornare risus quis, tempus molestie nibh. Donec sem est, imperdiet vitae sollicitudin ac, ullamcorper eget lorem. Phasellus interdum justo et enim gravida condimentum. Nullam condimentum elementum nibh, et hendrerit lectus tempus sed. Sed at nisl id sem aliquet luctus in sed tellus. Praesent id tortor mollis, tincidunt tortor in, dignissim eros. Curabitur iaculis tincidunt ultrices. Suspendisse tristique semper eros ut viverra. Donec suscipit bibendum augue, a feugiat magna euismod eu. Donec et elit sit amet est faucibus bibendum ut non purus.
+
+                    Sed sollicitudin orci in hendrerit semper. Suspendisse scelerisque ornare tellus vitae dapibus. Phasellus volutpat luctus auctor. Ut pretium velit commodo mauris iaculis, hendrerit lobortis metus tincidunt. Aliquam id bibendum dui. Maecenas condimentum nibh id sem tincidunt lacinia. Suspendisse hendrerit ipsum ac erat finibus luctus. Maecenas congue ipsum at dolor pellentesque, id porta tellus condimentum. Duis id viverra tortor.</div>
+                 <div class="popup__buttons">
+                     <div class="popup__button"></div>
+                     <div class="popup__button"></div>
+                </div>
+             </div>
+             <!---------------------------------------POPUP 2----------------------------------->
+             <div id="popupAislado" class="popup">
+                <div id="popup_close_button" class="close_button" onclick="popupClose('aislado')">X</div>
+                <div class="popup__titles">
+                    <div id="popup_title" class="popup__title">Energía Solar</div>
+                    <div id="popup_subtitle" class="popup__subtitle">Sistemas Aislados</div>
+                </div>
+                <div class="popup__images">
+                   <img class="popup__image" src="./img/solar_aislado.jpg"/>
+                </div>
+                <div id="popup_info" class="popup__info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non mi eu est tempus semper. Proin in erat semper, mattis lorem posuere, rutrum lectus. Nunc felis diam, laoreet ornare risus quis, tempus molestie nibh. Donec sem est, imperdiet vitae sollicitudin ac, ullamcorper eget lorem. Phasellus interdum justo et enim gravida condimentum. Nullam condimentum elementum nibh, et hendrerit lectus tempus sed. Sed at nisl id sem aliquet luctus in sed tellus. Praesent id tortor mollis, tincidunt tortor in, dignissim eros. Curabitur iaculis tincidunt ultrices. Suspendisse tristique semper eros ut viverra. Donec suscipit bibendum augue, a feugiat magna euismod eu. Donec et elit sit amet est faucibus bibendum ut non purus.
+
+                   Sed sollicitudin orci in hendrerit semper. Suspendisse scelerisque ornare tellus vitae dapibus. Phasellus volutpat luctus auctor. Ut pretium velit commodo mauris iaculis, hendrerit lobortis metus tincidunt. Aliquam id bibendum dui. Maecenas condimentum nibh id sem tincidunt lacinia. Suspendisse hendrerit ipsum ac erat finibus luctus. Maecenas congue ipsum at dolor pellentesque, id porta tellus condimentum. Duis id viverra tortor.</div>
+                <div class="popup__buttons">
+                    <div class="popup__button"></div>
+                    <div class="popup__button"></div>
+               </div>
+            </div>
+         </div>
     </body>
-    
-    <script type="text/javascript">
-    
-    //-------------------------------Get elements from HTML--------------------------------------
-    let navbar = document.getElementById("navbar");
-    let logo = document.getElementById("logo");
-    let logo_contacto = document.getElementById("logo_contacto");
-    let arrow_up = document.getElementById("arrow_up");
-    let serviciosButton = document.getElementById("serviciosButton");
-    let contactoButton = document.getElementById("contactoButton");
-    let servicios = document.getElementById("servicios");
-    let contacto = document.getElementById("contacto");
-    //-------------------------------Strings para importar botones del menu de servicios----------
-    let renovablesButton = document.getElementById("renovablesButton");
-    let smarthomeButton = document.getElementById("smarthomeButton");
-    let seguridadButton = document.getElementById("seguridadButton");
-    let webappsButton = document.getElementById("webappsButton");
-
-    //-------------------------------Strings para importar slides de servicios-------------------
-    let renovables = document.getElementById("renovables");
-    let smarthome = document.getElementById("smarthome");
-    let seguridad = document.getElementById("seguridad");
-    let webapps = document.getElementById("webapps");
-
-    //---------------------------------Seteo de inicio-------------------------------------------
-    renovables.style.display = "none";
-    smarthome.style.display = "none";
-    seguridad.style.display = "none";
-    webapps.style.display = "none";
-
-    function goUp(){
-        navbar.scrollIntoView({behavior: "smooth", block: "start",});
-    }
-    var logoObserver = new IntersectionObserver(function(entries) {
-        if(entries[0].isIntersecting === true){
-            logo_contacto.style.opacity = 1;
-            arrow_up.style.backgroundColor = "#f4f4f4";
-            }
-            else {
-                logo_contacto.style.opacity = 0;
-                arrow_up.style.backgroundColor = "#1c50ba";
-            }
-        }, { threshold: [.35] }
-    );
-    var arrowObserver = new IntersectionObserver(function(entries) {
-        if(entries[0].isIntersecting === true){
-            arrow_up.style.opacity = 0;
-            
-            }
-            else {
-                
-                arrow_up.style.opacity = 1;
-                arrow_up.style.backgroundColor = "#1c50ba";
-                
-            }
-        }, { threshold: [.35] }
-    );
-
-    
-    arrowObserver.observe(document.querySelector(".section--1"));
-    logoObserver.observe(document.querySelector(".section--3"));
-
-
-    function menuClick(buttonPressed){
-        switch(buttonPressed){
-            case "serviciosButton":
-                servicios.scrollIntoView({behavior: "smooth", block: "start",});
-            break;
-            case "contactoButton":
-            contacto.scrollIntoView({behavior: "smooth", block: "start",});
-            break;
-            case "logo":
-            break;
-        }
-    };
-    function display(slide){
-        switch(slide){
-            case "renovables":
-                renovables.style.display = "flex";
-                smarthome.style.display = "none";
-                seguridad.style.display = "none";
-                webapps.style.display = "none";
-            break;
-            case "smarthome":
-            renovables.style.display = "none";
-                smarthome.style.display = "flex";
-                seguridad.style.display = "none";
-                webapps.style.display = "none";
-            break;
-            case "seguridad":
-                renovables.style.display = "none";
-                smarthome.style.display = "none";
-                seguridad.style.display = "flex";
-                webapps.style.display = "none";
-            break;
-            case "webapps":
-                renovables.style.display = "none";
-                smarthome.style.display = "none";
-                seguridad.style.display = "none";
-                webapps.style.display = "flex";
-            break;
-        }
-    }
-    function changeButtonStyle(button){
-        
-        switch(button){
-            case "renovables": 
-                renovablesButton.classList.add("servicios_menu__link__selected");
-                smarthomeButton.classList.remove("servicios_menu__link__selected");
-                seguridadButton.classList.remove("servicios_menu__link__selected");
-                webappsButton.classList.remove("servicios_menu__link__selected");
-            break;
-            case "smarthome": 
-                renovablesButton.classList.remove("servicios_menu__link__selected");
-                smarthomeButton.classList.add("servicios_menu__link__selected");
-                seguridadButton.classList.remove("servicios_menu__link__selected");
-                webappsButton.classList.remove("servicios_menu__link__selected");
-            break;
-            case "seguridad": 
-                renovablesButton.classList.remove("servicios_menu__link__selected");
-                smarthomeButton.classList.remove("servicios_menu__link__selected");
-                seguridadButton.classList.add("servicios_menu__link__selected");
-                webappsButton.classList.remove("servicios_menu__link__selected");
-            break;
-            case "webapps": 
-                renovablesButton.classList.remove("servicios_menu__link__selected");
-                smarthomeButton.classList.remove("servicios_menu__link__selected");
-                seguridadButton.classList.remove("servicios_menu__link__selected");
-                webappsButton.classList.add("servicios_menu__link__selected");
-            break;
-        }
-    }
-    function serviciosMenuClick(buttonPressed){
-        switch(buttonPressed){
-            case "renovablesButton":
-                changeButtonStyle("renovables");
-                display("renovables");
-            break;
-            case "smarthomeButton":
-                changeButtonStyle("smarthome");
-                display("smarthome");
-            break;
-            case "seguridadButton":
-                changeButtonStyle("seguridad");
-                display("seguridad");
-            break;
-            case "webappsButton":
-                changeButtonStyle("webapps");
-                display("webapps");
-            break;
-        }
-    };
+    <script type="text/javascript" src="js/index.js">
     </script>
-
 </html>
 
-
-<!--
-        <section class="grid-test">
-            <div class="row">
-                <div class="col-1-of-2">Col 1 of 2</div>
-                <div class="col-1-of-2">Col 1 of 2</div>
-            </div>
-            <div class="row">
-                <div class="col-1-of-3">Col 1 of 3</div>
-                <div class="col-1-of-3">Col 1 of 3</div>
-                <div class="col-1-of-3">Col 1 of 3</div>
-            </div>
-            <div class="row">
-                <div class="col-1-of-3">Col 1 of 3</div>
-                <div class="col-2-of-3">Col 2 of 3</div>
-            </div>
-            <div class="row">
-                <div class="col-1-of-4">Col 1 of 4</div>
-                <div class="col-1-of-4">Col 1 of 4</div>
-                <div class="col-1-of-4">Col 1 of 4</div>
-                <div class="col-1-of-4">Col 1 of 4</div>
-            </div>
-            <div class="row">
-                <div class="col-1-of-4">Col 1 of 4</div>
-                <div class="col-1-of-4">Col 1 of 4</div>
-                <div class="col-2-of-4">Col 2 of 4</div>
-            </div>
-            <div class="row">
-                <div class="col-1-of-4">Col 1 of 4</div>
-                <div class="col-3-of-4">Col 3 of 4</div>
-            </div>
-        </section>
-        -->
